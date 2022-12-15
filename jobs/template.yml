@@ -1,0 +1,12 @@
+variables:
+    TEMPLATE_STAGE: none
+    TEMPLATE_TAG: none
+    TEMPLATE_PATH: ./
+
+.build_docker_image:
+    stage: $TEMPLATE_STAGE
+    tags:
+        - $TEMPLATE_TAG
+    script:
+        - cd $TEPLATE_PATH
+        - ls
