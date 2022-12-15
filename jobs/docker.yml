@@ -1,0 +1,18 @@
+variables:
+    IMAGE_NAME: none
+    DOCKERFILE: Dockerfile
+    VERSION: none
+    CONTEXT_PATH: .
+    DOCKER_PRUNE: true
+
+.build_docker_image:
+    stage: build
+    tags:
+        - docker_builder
+    only:
+        - dev
+        - /^release-v.*$/
+    script:
+        - docker build -f $DOCKERFILE -t $IMAGE_NAME:$VERSION $CONTEXT_PATH
+    after_script:
+        - if [[ $DOCKER_PRUNE == true ]]; then docker image prune -f; fi
